@@ -1,2 +1,33 @@
 SYNCING MS-ACCCESS WITH MS SQL SERVER
 
+Source:  https://stackoverflow.com/questions/8731408/sync-data-from-ms-access-to-ms-sql
+
+https://support.office.com/en-us/article/Move-Access-data-to-a-SQL-Server-database-by-using-the-Upsizing-Wizard-5d74c0df-c8cd-4867-8d07-e6e759d72924
+
+https://support.office.com/en-us/article/Import-or-link-to-SQL-Server-data-a5a3b4eb-57b9-45a0-b732-77bc6089b84e
+
+https://support.office.com/en-us/article/Import-or-link-Access-to-SQL-Server-data-ea1b29be-8c57-465e-ac35-18e3225ed9d5
+
+
+https://forums.asp.net/t/1803783.aspx?Synchronize+Access+DB+and+MsSQL+DB
+
+
+https://stackoverflow.com/questions/12272865/copy-access-database-to-sql-server-periodically
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
