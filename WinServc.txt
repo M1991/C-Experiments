@@ -1,0 +1,18 @@
+Creating Windows Service and MSAccess & SQL Server
+
+Source X 4 :  https://stackoverflow.com/questions/1935213/access-and-sql-server-realtime-synchronization
+
+https://www.codeproject.com/Articles/4416/Beginners-guide-to-accessing-SQL-Server-through-C
+
+http://www.c-sharpcorner.com/article/creating-a-windows-service-in-C-Sharp/
+
+https://www.codeproject.com/Articles/14353/Creating-a-Basic-Windows-Service-in-C
+
+https://stackoverflow.com/questions/1935213/access-and-sql-server-realtime-synchronization
+
+
+
+=============================================================
+
+
+
