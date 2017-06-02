@@ -16,7 +16,11 @@ https://stackoverflow.com/questions/12272865/copy-access-database-to-sql-server-
 
 
 
+===============================================================================
 
+Office Syncs : 
+
+https://support.office.com/en-us/article/Top-10-reasons-to-use-Access-with-Excel-2a454445-13cc-4b39-bc2f-d27fd12ca414
 
 
 
