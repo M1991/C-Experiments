@@ -14,5 +14,27 @@ https://stackoverflow.com/questions/1935213/access-and-sql-server-realtime-synch
 
 =============================================================
 
+SSIS ETL Package Automated EMAIL Sending
+
+Static : https://www.mssqltips.com/sqlservertip/1731/sending-email-from-sql-server-integration-services-ssis/
+
+https://docs.microsoft.com/en-us/sql/integration-services/control-flow/send-mail-task
+
+Dynm :  https://www.mssqltips.com/sqlservertip/1753/sending-html-formatted-email-in-sql-server-using-the-ssis-script-task/
+
+https://docs.microsoft.com/en-us/sql/integration-services/integration-services-ssis-variables
+
+https://stackoverflow.com/questions/14457592/dynamic-mailing-in-ssis
+
+https://support.microsoft.com/en-in/help/906547/how-to-create-a-dynamic-subject-or-message-for-the-send-mail-task-in-sql-server-2005-integration-services
+
+https://www.codeproject.com/Questions/1075592/Dynamic-Mail-Attachment-in-SSIS
+
+
+
+
+Source StackOverFLow :  https://stackoverflow.com/questions/36241129/send-sms-text-message-using-ssis-package
+
+
 
 
