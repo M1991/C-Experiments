@@ -1,7 +1,4 @@
-
 https://stackoverflow.com/questions/41684213/looking-for-a-very-simple-cache-example
-
-
 
 
 .NET provides a few Cache classes
