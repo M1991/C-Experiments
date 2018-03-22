@@ -1,0 +1,79 @@
+
+
+
+
+Calling Functions
+
+[OutputCache(CacheProfile = "TransparentClient", Duration = 7200, Location = OutputCacheLocation.Client, VaryByParam = "none", NoStore = true)]
+[CustomsOutputCache(CacheProfile = "Long")]
+
+
+All CACHE CONFTOL FILTERS 
+
+  public sealed class CacheControlAttribute : ActionFilterAttribute
+    {
+        private readonly HttpCacheability cacheability;
+        public HttpCacheability Cacheability { get { return this.cacheability; } }
+        public CacheControlAttribute(HttpCacheability cacheability)
+        {
+            this.cacheability = cacheability;
+        }
+        public override void OnActionExecuted(ActionExecutedContext filterContext)
+        {
+            HttpCachePolicyBase cache = filterContext.HttpContext.Response.Cache;
+            cache.SetCacheability(this.cacheability);
+        }
+    }
+
+    public class NoCacheAttribute : ActionFilterAttribute
+    {
+        public override void OnResultExecuting(ResultExecutingContext filterContext)
+        {
+            filterContext.HttpContext.Response.Cache.SetExpires(DateTime.UtcNow.AddDays(-1));
+            filterContext.HttpContext.Response.Cache.SetValidUntilExpires(false);
+            filterContext.HttpContext.Response.Cache.SetRevalidation(HttpCacheRevalidation.AllCaches);
+            filterContext.HttpContext.Response.Cache.SetCacheability(HttpCacheability.NoCache);
+            filterContext.HttpContext.Response.Cache.SetNoStore();
+
+            base.OnResultExecuting(filterContext);
+        }
+    }
+
+    public class InternationalizationAttribute : ActionFilterAttribute
+    {
+        public override void OnActionExecuting(ActionExecutingContext filterContext)
+        {
+            string language = (string)filterContext.RouteData.Values["language"] ?? "nl";
+            string culture = (string)filterContext.RouteData.Values["culture"] ?? "NL";
+
+            Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo(string.Format("{0}-{1}", language, culture));
+            Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(string.Format("{0}-{1}", language, culture));
+        }
+    }
+  
+    public class CustomsOutputCache : OutputCacheAttribute
+    {
+        public override void OnResultExecuted(ResultExecutedContext filterContext)
+        {
+            base.OnResultExecuted(filterContext);
+            if (filterContext.HttpContext.Response.StatusCode == 304)
+            {
+                // do not cache the 304 response                
+                filterContext.HttpContext.Response.CacheControl = "";
+            }
+        }
+    }
+
+    public class PartialCacheAttribute : OutputCacheAttribute
+    {
+        public PartialCacheAttribute(string cacheProfileName)
+         {
+            var cacheSection = (OutputCacheSettingsSection)WebConfigurationManager
+                                 .GetSection("system.web/caching/outputCacheSettings");
+      
+             var cacheProfile = cacheSection.OutputCacheProfiles[cacheProfileName];
+      
+            Duration = cacheProfile.Duration;
+            VaryByParam = cacheProfile.VaryByParam;
+       }   
+    }
