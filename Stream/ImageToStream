@@ -7,3 +7,75 @@ private async void LoadPictrueByUrl()
     bitmapImage.SetSource(stream);
     img.Source = bitmapImage;
 }
+
+
+
+
+Raise your hand if you’ve loaded an image from a Resource (or a BLOB database field): 
+
+        Bitmap bm2 = this.GetGlobalResourceObject("Resources", "_BitMap") as Bitmap;
+        Response.ContentType = "image/jpeg";
+        bm2.Save(Response.OutputStream, ImageFormat.Jpeg);
+        Response.End();
+ 
+
+and finding out that you can’t save the image! You get a not so happy error:
+
+A generic error occurred in GDI+.
+Description: An unhandled exception occurred during the execution of the current web request. Please review the stack trace for more information about the error and where it originated in the code. 
+
+Exception Details: System.Runtime.InteropServices.ExternalException: A generic error occurred in GDI+.
+
+Source Error:
+
+Line 41: 
+Line 42:         Response.ContentType = "image/jpeg";
+Line 43:         bm2.Save(Response.OutputStream, ImageFormat.Jpeg);
+Line 44:         Response.End();
+Line 45: 
+
+Source File: c:\projects2005\Articles\Internationalization\Test.aspx.cs    Line: 43
+
+ 
+
+I know this isn’t the first time I’ve done this and scratched my head and go WTF. The bitmap’s there but it won’t save, not to the output stream or to disk (even with permissions for it).
+So what gives? The documentation is not real clear on this, although MSDN has a little blurp on not saving to the same stream:
+
+Remarks
+You should avoid saving an image to the same stream that was used to construct it. Doing so might damage the stream.
+I don’t think this applies here – the Bitmap resource comes from a database field’s raw byte stream into a memory stream from which the image is loaded in my custom Resource Provider out of a database. The original stream is long gone, but maybe that’s just the problem… 
+
+Whatever the problem is, the code above doesn’t work.
+
+The solution is to create a second bitmap and basically copy the image into a new Bitmap object and then save  to the outputstream:
+
+
+        Bitmap bm2 = this.GetGlobalResourceObject("Resources", "_BitMap") as Bitmap;
+        Bitmap bm3 = new Bitmap(bm2); 
+
+        Response.ContentType = "image/jpeg";
+        bm3.Save(Response.OutputStream, ImageFormat.Jpeg);
+
+        bm2.Dispose();
+        bm3.Dispose();
+        Response.End(); 
+
+Works but it really bites that this unobvious piece of code should be necessary especially since Bitmap objects are not exactly lightweight objects to load and keep around even for a short period of time.
+
+ 
+
+Remember PNG Images are ‘special’
+In addition to the above issue remember that you can’t save PNG images directly into the output stream because of some issues with that particular format. Instead you need to write the image first into a memory stream:
+
+        Bitmap bm2 = this.GetGlobalResourceObject("Resources", "_BitMap") as Bitmap;
+        Bitmap bm3 = new Bitmap(bm2);
+        MemoryStream ms = new MemoryStream();
+        Response.ContentType = "image/png";
+        bm3.Save(MemStream, System.Drawing.Imaging.ImageFormat.Png);
+        MemStream.WriteTo(Response.OutputStream);
+        bm2.Dispose();
+        bm3.Dispose();
+        Response.End(); 
+
+Note that you still need to do the Bitmap swapping if the image is loaded a certain way (like from the ResourceProvider) as you can’t save to a memory stream without it either.
+
