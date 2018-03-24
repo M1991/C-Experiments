@@ -1,0 +1,9 @@
+private async void LoadPictrueByUrl()
+{
+    string url = "http://******.jpg";
+    var rass = RandomAccessStreamReference.CreateFromUri(new Uri(url));
+    IRandomAccessStream stream = await rass.OpenReadAsync();
+    var bitmapImage = new BitmapImage();
+    bitmapImage.SetSource(stream);
+    img.Source = bitmapImage;
+}
