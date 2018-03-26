@@ -1,6 +1,6 @@
-
-/// Its alwasys better when storing the full save path of images, in case of deleting the image (if required)
-/// It reduces the chance of fileNotFound exception and deleting other file instead of that file.
+**Note :
+Its alwasys better when storing the full save path of images, in case of deleting the image (if required)
+It reduces the chance of fileNotFound exception and deleting other file instead of that file.
 
 
 
