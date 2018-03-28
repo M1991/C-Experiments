@@ -1,0 +1,42 @@
+
+
+
+
+using System;
+using System.IO;
+
+class Program
+{
+    static void Main()
+    {
+        // Use FileStream with File.Create.
+        // ... Pass FileStream to a StreamWriter and write data to it.
+        using (FileStream fileStream =
+            File.Create(@"C:\programs\example1.txt"))
+        using (StreamWriter writer = new StreamWriter(fileStream))
+        {
+            writer.WriteLine("Example 1 written");
+        }
+        Console.WriteLine("DONE");
+    }
+}
+
+
+
+Output
+
+DONE
+
+Contents of example1.txt:
+
+Example 1 written
+
+
+
+
+
+
+
+
+
+
