@@ -54,8 +54,26 @@ Output
 
 
 
+Steps to close a file
 
 
+using (FileStream stream = new FileStream("test.jpg", FileMode.Open, FileAccess.Read))
+{
+    pictureBox1.Image = Image.FromStream(stream);
+     stream.Dispose();
+}
+
+ // delete your file.
+
+ File.Delete(delpath);
+
+
+
+Also Garbage Collection
+
+System.GC.Collect(); 
+System.GC.WaitForPendingFinalizers(); 
+File.Delete(picturePath);
 
 
 
