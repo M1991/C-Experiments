@@ -1,4 +1,4 @@
-##Simple Memory Stream to create and save a file
+## Simple Memory Stream to create and save a file
 
 
 C# program that uses the MemoryStream type
@@ -51,7 +51,7 @@ Output
 
 
 
-##Steps to close a file
+## Steps to close a file
 
 
 using (FileStream stream = new FileStream("test.jpg", FileMode.Open, FileAccess.Read))
