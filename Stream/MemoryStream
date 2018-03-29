@@ -71,3 +71,19 @@ Also Garbage Collection
 System.GC.Collect(); 
 System.GC.WaitForPendingFinalizers(); 
 File.Delete(picturePath);
+
+
+
+## Another Step to delete a file
+    ** Check if the file exist, If exist, then
+    **  First read the file, open it and finally close the file
+    ** After closing it is ready for DELETE
+    
+    
+FileStream fs = File.Open(@"C:\Test1.txt", FileMode.Open, FileAccess.Read);
+MemoryStream ms = new MemoryStream();
+byte[] buffer = new byte[fs.Length];
+ms.Write(buffer, 0, buffer.Length);
+fs.Close();//delete the file after this
+File.Delete(@"C:\Test1.txt")    
+
