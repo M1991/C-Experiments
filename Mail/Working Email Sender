@@ -3,6 +3,20 @@
                 ## OPen command prompt administrator, type telnet domainServer port, you will get a response of 220                
                 
                 
+                Set this settiing inside configuration in web.config
+                
+                <system.net>
+    <mailSettings>
+       <!--<smtp deliveryMethod="SpecifiedPickupDirectory"> 
+         <specifiedPickupDirectory pickupDirectoryLocation="C:\Mails\" />   --><!--For local check PICKUP directory-->
+      <smtp>
+       <network host="somename.domain.org" port="25" userName="name@domain.com" password="" />  
+          
+      </smtp>
+    </mailSettings>
+  </system.net> 
+                                
+                ## In controller or function, Pass subject, Body and Sender
                 
                 MailMessage message = new MailMessage();                
                 string toEmail = "to@domain.com";
