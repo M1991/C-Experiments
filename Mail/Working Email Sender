@@ -1,0 +1,26 @@
+                Setup SMTP for current domain. You will get a server name and port number
+                ## Activate telnet,  "Turn windows features off/on" , bottom, check for Telnet Client, Check and click oK
+                ## OPen command prompt administrator, type telnet domainServer port, you will get a response of 220                
+                
+                
+                
+                MailMessage message = new MailMessage();                
+                string toEmail = "to@domain.com";
+                message.IsBodyHtml = true;
+                //  message.From = new MailAddress("mail@domain.com", "Display Name");
+                MailAddress fromAddress = new MailAddress(recvr);
+                message.From = fromAddress;
+               // string[] multiRecvr = toEmail.Split(',');
+                //foreach (string itemrecvr in multiRecvr)
+                //{
+                //    message.To.Add(new MailAddress(itemrecvr));
+                //}
+                message.To.Add(new MailAddress(toEmail));
+
+                message.Subject = subject;              
+                message.Body = body;
+                SmtpClient client = new SmtpClient();
+                client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                client.EnableSsl = false;
+                client.Port = 25;
+                client.Send(message);
